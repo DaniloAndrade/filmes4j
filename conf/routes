@@ -1,0 +1,17 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+#GET     /                           controllers.Application.index()
+GET        /                           controllers.Inicio.index()
+GET        /diretor                    controllers.DiretorCRUD.lista()
+POST       /diretor                    controllers.DiretorCRUD.gravar()
+GET        /sobre                      controllers.Application.sobre()
+GET        /play                       controllers.Application.index()
+GET        /diretor/novo               controllers.DiretorCRUD.novo()
+GET        /diretor/$id<[0-9]+>        controllers.DiretorCRUD.detalhar(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file               controllers.Assets.at(path="/public", file)
+

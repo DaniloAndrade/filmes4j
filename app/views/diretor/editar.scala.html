@@ -1,0 +1,25 @@
+@(id:Long)(form:Form[Diretor])
+
+@main("Diretor"){
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a href="@routes.Inicio.index()">Home</a></li>
+            </ul>
+        </div>
+    </div>
+    @helper.form(action = routes.DiretorCRUD.gravar(), 'class -> "form-horizontal"){
+        <fieldset>
+            <legend>Diretor</legend>
+        </fieldset>
+        @helper.inputText(form("nome"), '_label -> "Nome:", 'size -> 45,'placeholder -> "informe o nome do diretor")
+        <div class="control-group">
+            <label class="control-label" for="singlebutton"></label>
+            <div class="controls">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    }
+}
