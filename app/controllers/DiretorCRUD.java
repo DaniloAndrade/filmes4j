@@ -5,7 +5,6 @@ import models.Diretor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.helper.form;
 
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class DiretorCRUD extends Controller {
     }
 
     public static Result detalhar(Long id){
-        Diretor diretor = Ebean.find(Diretor.class,id);
+        Diretor diretor = Diretor.find.byId(id);
+        //Diretor diretor = Ebean.find(Diretor.class,id);
         Form<Diretor> form = Form.form(Diretor.class).fill(diretor);
         return ok(views.html.diretor.editar.render(id,form));
     }
@@ -43,12 +43,23 @@ public class DiretorCRUD extends Controller {
         return redirect(routes.DiretorCRUD.lista());
     }
 
-    /*public static Result editar(){
-        Form<Diretor> diretorForm = Form.form(Diretor.class).bindFromRequest();
-        if (diretorForm.hasErrors()){
-            return badRequest(views.html.diretor.editar.render())
+    public static Result alterar(Long id){
+        Form.form(Diretor.class).fill(Diretor.find.byId(id));
+        Form<Diretor> formAlterar = Form.form(Diretor.class).bindFromRequest();
+        if (formAlterar.hasErrors()){
+            return badRequest(views.html.diretor.editar.render(id,formAlterar));
         }
+        formAlterar.get().update(id);
+        //Ebean.update(diretor);
+        flash("sucesso","Diretor "+formAlterar.get().getNome() + " alterado com sucesso");
+        return redirect(routes.DiretorCRUD.lista());
+    }
+    
+    public static Result remover(Long id){
+        Diretor diretor = (Diretor) Ebean.find(Diretor.class, id);
+        diretor.delete();
+        return redirect(routes.DiretorCRUD.lista());
+    }
 
-    }*/
 
 }

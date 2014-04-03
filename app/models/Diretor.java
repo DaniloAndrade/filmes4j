@@ -4,6 +4,8 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -33,4 +35,6 @@ public class Diretor extends Model {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public static Finder<Long,Diretor> find = new Finder<>(Long.class,Diretor.class);
 }

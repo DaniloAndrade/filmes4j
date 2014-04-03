@@ -8,17 +8,22 @@
             </ul>
         </div>
     </div>
-    @helper.form(action = routes.DiretorCRUD.gravar(), 'class -> "form-horizontal"){
+    @helper.form(action = routes.DiretorCRUD.alterar(id), 'class -> "form-horizontal"){
         <fieldset>
-            <legend>Diretor</legend>
+            @helper.inputText(form("nome"), '_label -> "Nome:", 'size -> 45,'placeholder -> "informe o nome do diretor")
         </fieldset>
-        @helper.inputText(form("nome"), '_label -> "Nome:", 'size -> 45,'placeholder -> "informe o nome do diretor")
         <div class="control-group">
-            <label class="control-label" for="singlebutton"></label>
-            <div class="controls">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">
-                    Salvar
-                </button>
+            <div class="actions">
+                <input type="submit" value="Gravar" class="btn btn-primary"/>
+                <a href="@routes.DiretorCRUD.lista" class="btn btn-primary">Cancelar</a>
+            </div>
+        </div>
+    }
+
+    @helper.form(routes.DiretorCRUD.remover(id)){
+        <div class="control-group">
+            <div class="actions">
+                <input type="submit" value="Remover" class="btn btn-danger">
             </div>
         </div>
     }
